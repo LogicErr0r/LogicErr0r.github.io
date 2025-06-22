@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brawl Hub - Historic Brawl Community</title>
+  <link rel="stylesheet" href="HomePage.css" />
+</head>
+<body>
+  <header>
+    <div class="logo"><strong>Brawl Hub</strong></div>
+    <div id="navbar"></div>
+  </header>
+
+  <script>
+    //venv\Scripts\activate
+    // python -m http.server
+    //http://localhost:8000/
+    fetch("Nav.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+      });
+  </script>
+
+  <!-- Rest of your content remains unchanged -->
+  <section class="hero">
+    <h1>Welcome to Brawl Hub</h1>
+    <p>The home for MTG Arena Historic Brawl.</p>
+    <a class="btn" href="https://discord.gg/uaQ9XqME">Join Our Discord</a>
+    <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSckZvYcohQgcOvVOybx8APEzTug29zU9I3vIR77Ga-IjxMPpQ/viewform">Submit Your Deck</a>
+  </section>
+
+  <section class="section">
+    <h2>Top Decks of the Week</h2>
+    <div class="deck-grid">
+      <div class="deck-card">
+        <h3>Jace Beleren</h3>
+        <p>Commander: Jace, the Mind Sculptor</p>
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1">View Deck</a>
+      </div>
+      <div class="deck-card">
+        <h3>Chandra Nalaar</h3>
+        <p>Commander: Chandra, Torch of Defiance</p>
+        <a href="https://www.youtube.com/shorts/15GaYBTPIfE">View Deck</a>
+      </div>
+      <div class="deck-card">
+        <h3>Liliana Vess</h3>
+        <p>Commander: Liliana, Dreadhorde General</p>
+        <a href="https://www.youtube.com/watch?app=desktop&v=sVjk5nrb_lI&t=72s">View Deck</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>This Weeks Parings</h2>
+  </section>
+
+  <footer>
+    <p>Not affiliated with Wizards of the Coast</p>
+  </footer>
+</body>
+</html>

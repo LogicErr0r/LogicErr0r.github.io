@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brawl Hub - Historic Brawl Community</title>
+  <link rel="stylesheet" href="HomePage.css" />
+  <link rel="stylesheet" href="LeagueRuleaPage.css" />
+</head>
+<body>
+  <header>
+    <div class="logo"><strong>Brawl Hub</strong></div>
+    <div id="navbar"></div>
+  </header>
+
+   <section class="hero2">
+    <h1>New to League?</h1>
+    <p>Learn more about us below.</p>
+  </section>
+
+  <div class="row">
+    <div class="column">
+      <h2 >What is Brawl?</h2>
+      <p>Brawl is a 1v1 singleton format where a deck is restricted to the color identity of its commander, a legendary creature OR a 
+        legendary planeswalker. There is no sideboard, players start with 25 life, and there is one free mulligan. Whenever a commander 
+        dies or would be put into exile, a player can choose to return it to the command zone instead, and a tax of two colorless mana is 
+        applied cumulatively toward the next time it would be cast. Brawl through the MTG arena queue is intended as a casual format. 
+        Instead of bans and balances, a matchmaking algorithm is used to segregate commanders by relative power level.</p>
+    </div>
+    <div class="column">
+      <h2>What is League?</h2>
+      <p>The Brawl Hub league takes the casual Brawl format and turns it into a competitive format. In order to keep the format 
+        competitive, the league uses a custom banlist reviewed each season, Bo3 matches, and pairings based on player performance. Sign-up 
+        to play, read the community-maintained banlist, submit a decklist, and receive weekly Bo3 matchups versus three different 
+        opponents from around the world. You have one week to schedule and play your matchups at your own convenience. Do well, and you 
+        will face more challenging opponents. End the season in the top eight and you will receive an invitation to the once-a-month 
+        double-elimination tournament. Conquer the tournament, and your name and deck list will be inducted to the hall of fame.</p>
+    </div>
+
+  </div>
+
+    <section class = "Joinstatment">
+      <hr width="100%;" color=e63946 size="5">
+      <p>Whether you're a competitive grinder or a casual deck brewer, the Brawl Hub Discord is the place to connect, share decks, ask questions, and join events. Join our discord to be a part of the community!</p>
+      <a class="btn" href="https://discord.gg/uaQ9XqME">Join Our Discord</a>
+    </section>
+
+  <script>
+    fetch("Nav.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+      });
+  </script>
+
+  
+
+  <footer>
+    <p>Not affiliated with Wizards of the Coast</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Users - Brawl Hub</title>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <link rel="stylesheet" href="HomePage.css" />
+  <link rel="stylesheet" href="stats.css" />
+</head>
+<body>
+  <header>
+    <div class="logo"><strong>Brawl Hub</strong></div>
+    <div id="navbar"></div>
+  </header>
+
+  <section class="hero2">
+    <h1>Player Search</h1>
+    <p>Search for a player to see their stats</p>
+  </section>
+
+  <p>Currently only stats from season 20 are available. More detailed stats are comming soon</p>
+
+
+  <form action="" class="search-bar">
+    <input id="search-bar" type="search" name="search" pattern=".*\S.*" required />
+    <button class="search-btn" type="submit">
+      <span>Search</span>
+    </button>
+  </form>
+  <div id="output"></div>
+
+  <script>
+    fetch("Nav.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+      });
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA5uE0HIxDJCwN-8YBfrd8H8NeLYgwgezI",
+      authDomain: "brawlhub-2be16.firebaseapp.com",
+      projectId: "brawlhub-2be16",
+      storageBucket: "brawlhub-2be16.appspot.com",
+      messagingSenderId: "801047895614",
+      appId: "1:801047895614:web:2d08389924ff508fa13b6f",
+      measurementId: "G-HE99M04PHV"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    const outputDiv = document.getElementById('output');
+    const searchBar = document.getElementById('search-bar');
+    let users = [];
+
+    auth.signInAnonymously()
+      .then(() => db.collection('Users').get())
+      .then((querySnapshot) => {
+        users = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+      })
+      .catch((error) => {
+        outputDiv.textContent = 'Error: ' + error.message;
+      });
+
+    function displayUsers(userList) {
+      outputDiv.innerHTML = '';
+      if (userList.length === 0) {
+        outputDiv.textContent = 'No matching users found.';
+        return;
+      }
+      userList.forEach(user => {
+        const card = document.createElement('div');
+        card.className = 'user-card';
+        card.innerHTML = `
+          <strong>${user["Discord Tag"] || user.id}</strong><br />
+          Wins: ${user.totalWins || 0}<br />
+          Losses: ${user.totalLosses || 0}
+        `;
+        outputDiv.appendChild(card);
+      });
+    }
+
+    // Search input handler
+    searchBar.addEventListener('input', () => {
+      const term = searchBar.value.toLowerCase();
+      outputDiv.style.display = term ? 'flex' : 'none';
+
+      const filtered = users.filter(user =>
+        (user["Discord Tag"] || "").toLowerCase().includes(term)
+      );
+      displayUsers(filtered);
+    });
+
+    // Prevent form from submitting and refreshing the page
+    document.querySelector('.search-bar').addEventListener('submit', e => {
+      e.preventDefault();
+    });
+  </script>
+</body>
+</html>

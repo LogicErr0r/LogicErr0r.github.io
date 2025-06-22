@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Featured Decks - Brawl Hub</title>
+  <link rel="stylesheet" href="HomePage.css" />
+  <link rel="stylesheet" href="featureddecks.css" />
+</head>
+<body>
+    <header>
+      <div class="logo"><strong>Brawl Hub</strong></div>
+      <div id="navbar"></div>
+  </header>
+
+  <section class="hero2">
+    <h1>Featured League Decks</h1>
+    <p></p>
+  </section>
+
+  <main class="section">
+    <h2>3-0 Decks for Week 0 of Season 22</h2>
+    <div class="deck-grid" id="deck-container"></div>
+  </main>
+
+  <footer>
+    <p>Not affiliated with Wizards of the Coast</p>
+  </footer>
+
+  <script>
+    // Load navbar
+    fetch('Nav.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('navbar').innerHTML = data);
+
+    // Load featured decks
+    fetch('featured-decks.json')
+      .then(response => response.json())
+      .then(decks => {
+        const container = document.getElementById('deck-container');
+        decks.forEach(deck => {
+          const card = document.createElement('div');
+          card.className = 'deck-card';
+          card.innerHTML = `
+            <h3>${deck.name}</h3>
+            <p>Commander: ${deck.commander}</p>
+            <a href="${deck.link}" target="_blank">View Deck</a>
+          `;
+          container.appendChild(card);
+        });
+      })
+      .catch(err => console.error('Failed to load decks:', err));
+  </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event Calendar - Brawl Hub</title>
+  <link rel="stylesheet" href="EvenCalender.css" />
+  <link rel="stylesheet" href="HomePage.css" />
+</head>
+<body>
+    <header>
+        <div class="logo"><strong>Brawl Hub</strong></div>
+        <div id="navbar"></div>     
+  </header>
+
+  <section class="hero2">
+    <h1>Event Calender</h1>
+    <p>Check out our upcoming events</p>
+  </section>
+
+  <div class="events-container" id="events-container"></div>
+
+  
+
+<script>
+  // Load navbar
+  fetch('Nav.html')
+    .then(response => response.text())
+    .then(data => document.getElementById('navbar').innerHTML = data);
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'short' }).toUpperCase();
+    return { day, month };
+  }
+
+  function createEventCard(event) {
+    const { day, month } = formatDate(event.date);
+    return `
+      <div class="event-card">
+        <div class="event-date">
+          <div class="event-day">${day}</div>
+          <div class="event-month">${month}</div>
+        </div>
+        <div class="event-info">
+          <div class="event-title">${event.title}</div>
+          <div class="event-description">${event.description}</div>
+          <div class="event-tag">${event.tag}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  fetch('dates.json')
+    .then(res => res.json())
+    .then(events => {
+      const container = document.getElementById('events-container');
+      container.innerHTML = events.map(createEventCard).join('');
+    })
+    .catch(err => console.error('Failed to load events:', err));
+</script>

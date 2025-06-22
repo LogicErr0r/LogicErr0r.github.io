@@ -1,0 +1,7 @@
+{
+  "players": [
+    { "name": "Themudman", "wins": 100, "losses": -100 },
+    { "name": "Jace", "wins": 8, "losses": 1 },
+    { "name": "Chandra", "wins": 0, "losses": 4 }
+  ]
+}
